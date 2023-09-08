@@ -7,4 +7,4 @@
 import Foundation
 
 
-RockPaperScissors().run()
+Game().run()

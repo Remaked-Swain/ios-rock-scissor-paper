@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+@frozen enum PlayerType {
+    case computer, user
+}

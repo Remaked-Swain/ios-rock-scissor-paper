@@ -9,7 +9,7 @@ import Foundation
 
 final class Game {
     func run() {
-        
+        doRSP()
     }
     
     func doRSP() {
@@ -31,7 +31,7 @@ extension Game {
         }
     }
     
-    private func determineWinner(computerHandSign: HandSign, userHandSign: HandSign) -> PlayerType {
+    private func determineWinner(computerHandSign: HandSign, userHandSign: HandSign) {
         
     }
 }

@@ -11,6 +11,7 @@
 		0458E3CA2AAB66FC00F1FA49 /* HandSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458E3C92AAB66FC00F1FA49 /* HandSign.swift */; };
 		0458E3CE2AAB67AC00F1FA49 /* InputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458E3CD2AAB67AC00F1FA49 /* InputType.swift */; };
 		0458E3D52AAB791C00F1FA49 /* PlayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458E3D42AAB791C00F1FA49 /* PlayerType.swift */; };
+		0458E3D72AAB8DAF00F1FA49 /* GameResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458E3D62AAB8DAF00F1FA49 /* GameResult.swift */; };
 		C7ABA0E1254EA63000B2367D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ABA0E0254EA63000B2367D /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		0458E3C92AAB66FC00F1FA49 /* HandSign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandSign.swift; sourceTree = "<group>"; };
 		0458E3CD2AAB67AC00F1FA49 /* InputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputType.swift; sourceTree = "<group>"; };
 		0458E3D42AAB791C00F1FA49 /* PlayerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerType.swift; sourceTree = "<group>"; };
+		0458E3D62AAB8DAF00F1FA49 /* GameResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResult.swift; sourceTree = "<group>"; };
 		C7ABA0DD254EA63000B2367D /* RockPaperScissors */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RockPaperScissors; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7ABA0E0254EA63000B2367D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,6 +55,7 @@
 				0458E3C92AAB66FC00F1FA49 /* HandSign.swift */,
 				0458E3CD2AAB67AC00F1FA49 /* InputType.swift */,
 				0458E3D42AAB791C00F1FA49 /* PlayerType.swift */,
+				0458E3D62AAB8DAF00F1FA49 /* GameResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			files = (
 				0458E3D52AAB791C00F1FA49 /* PlayerType.swift in Sources */,
 				0458E3CE2AAB67AC00F1FA49 /* InputType.swift in Sources */,
+				0458E3D72AAB8DAF00F1FA49 /* GameResult.swift in Sources */,
 				C7ABA0E1254EA63000B2367D /* main.swift in Sources */,
 				0458E3C82AAB66C000F1FA49 /* Game.swift in Sources */,
 				0458E3CA2AAB66FC00F1FA49 /* HandSign.swift in Sources */,

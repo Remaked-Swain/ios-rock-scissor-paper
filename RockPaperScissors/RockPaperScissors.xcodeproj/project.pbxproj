@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0458E3B22AA8127E00F1FA49 /* InterfaceScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458E3B12AA8127E00F1FA49 /* InterfaceScript.swift */; };
-		0458E3B42AA8130000F1FA49 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458E3B32AA8130000F1FA49 /* Order.swift */; };
-		0458E3B72AA813DD00F1FA49 /* RockPaperScissors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458E3B62AA813DD00F1FA49 /* RockPaperScissors.swift */; };
+		0458E3C82AAB66C000F1FA49 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458E3C72AAB66C000F1FA49 /* Game.swift */; };
+		0458E3CA2AAB66FC00F1FA49 /* HandSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458E3C92AAB66FC00F1FA49 /* HandSign.swift */; };
+		0458E3CE2AAB67AC00F1FA49 /* InputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458E3CD2AAB67AC00F1FA49 /* InputType.swift */; };
+		0458E3D52AAB791C00F1FA49 /* PlayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458E3D42AAB791C00F1FA49 /* PlayerType.swift */; };
 		C7ABA0E1254EA63000B2367D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ABA0E0254EA63000B2367D /* main.swift */; };
 /* End PBXBuildFile section */
 

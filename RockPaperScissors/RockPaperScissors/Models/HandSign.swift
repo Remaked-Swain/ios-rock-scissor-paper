@@ -11,4 +11,6 @@ import Foundation
     case rock
     case scissors
     case paper
+    
+    var 
 }

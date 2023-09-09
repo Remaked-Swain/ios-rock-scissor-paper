@@ -16,8 +16,10 @@ final class Game {
         currentWinner = doRSP(currentWinner: currentWinner)
         
         guard let winner = currentWinner else { return }
+        print("현재 승자: \(winner)")
         
         guard let finalWinner = doRSP(currentWinner: winner) else { return }
+        print("현재 승자: \(finalWinner)")
         print(Script.win(finalWinner))
     }
 }
@@ -105,7 +107,6 @@ extension Game {
     private func compareMutualHandSign(computerHandSign: HandSign?, userHandSign: HandSign?, currentWinner: PlayerType?) -> GameResult? {
         guard let computerHandSign = computerHandSign, let userHandSign = userHandSign else { return nil }
         
-        guard let currentWinner = currentWinner else { return nil }
         let isNextStep: Bool = checkGameStep(currentWinner: currentWinner)
         
         switch (computerHandSign, userHandSign) {

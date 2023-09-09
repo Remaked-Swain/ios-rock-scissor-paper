@@ -13,7 +13,7 @@ import Foundation
     case win(_ currentWinner: PlayerType?)
     case lose
     case draw
-    case noticeCurrentWinner(_ currentWinner: PlayerType)
+    case noticeCurrentWinner(_ currentWinner: PlayerType?)
     case gameOver
     
     var description: String {
@@ -31,7 +31,7 @@ import Foundation
         case .draw:
             return "비겼습니다!"
         case .noticeCurrentWinner(let currentWinner):
-            return "\(currentWinner)의 턴입니다."
+            return "\(currentWinner ?? .computer)의 턴입니다."
         case .gameOver:
             return "게임 종료"
         }

@@ -9,29 +9,73 @@ import Foundation
 
 final class Game {
     func run() {
-        doRSP()
+        doRSP(currentWinner: nil)
     }
     
-    func doRSP() {
+    private func doRSP(currentWinner: PlayerType?) {
+        let userInput = input(currentWinner: currentWinner)
+        
+        guard userInput.showInputType() == .handSign else { return doRSP() }
+        
+        
+        guard let computerHandSign = generateRandomHandSign() else { return doRSP() }
+        
+        
+//        compareMutualHandSign(computerHandSign: computerHandSign, userHandSign: inputType)
+        
+    }
+    
+    private func menuBridge(userInput: UserInputModel, currentWinner: PlayerType?) {
         
     }
 }
 
 // MARK: Resuable Methods
 extension Game {
-    private func input() -> InputType {
-        print("가위(1), 바위(2), 보(3)! <종료 : 0> : ")
+    private func input(currentWinner: PlayerType?) -> UserInputModel {
+        print(Script.input(currentWinner))
         
-        guard let input = readLine(), let intInput = Int(input) else { return .invalidInput }
+        guard let input = readLine(), let intInput = Int(input) else { return UserInputModel(nil) }
         
         switch intInput {
-        case 0: return .exitProgram
-        case 1, 2, 3: return .handSign
-        default: return .invalidInput
+        case 0: return UserInputModel(0)
+        case 1, 2, 3: return UserInputModel(intInput)
+        default: return UserInputModel(nil)
         }
     }
     
-    private func determineWinner(computerHandSign: HandSign, userHandSign: HandSign) {
+    private func convertToEachHandSign(_ userInput: UserInputModel, currentWinner: PlayerType?) -> HandSign? {
+        guard userInput.showInputType() == .handSign, let value = userInput.showValue() else { return nil }
         
+        let isNextStep: Bool = currentWinner == nil ? false : true
+        
+        switch value {
+        case 1: return isNextStep ? .rock : .scissors
+        case 2: return isNextStep ? .scissors : .rock
+        case 3: return .paper
+        default: return nil
+        }
+    }
+    
+    private func generateRandomHandSign() -> HandSign? {
+        HandSign.allCases.randomElement()
+    }
+    
+    private func compareMutualHandSign(computerHandSign: HandSign?, userHandSign: HandSign?) -> GameResult {
+        guard let computerHandSign = computerHandSign, let userHandSign = userHandSign else { return .rematch }
+        
+        switch (computerHandSign, userHandSign) {
+        case (.rock, .paper), (.paper, .scissors), (.scissors, .rock): return .win
+        case (.rock, .scissors), (.paper, .rock), (.scissors, .paper): return .lose
+        case (.rock, .rock), (.paper, .paper), (.scissors, .scissors): return .draw
+        }
+    }
+    
+    private func determineWinner(_ gameResult: GameResult) -> PlayerType? {
+        switch gameResult {
+        case .win: return .user
+        case .lose: return .computer
+        default: return nil
+        }
     }
 }

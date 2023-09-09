@@ -8,5 +8,5 @@
 import Foundation
 
 @frozen enum GameResult {
-    case win, lose, draw
+    case win, lose, draw, rematch
 }

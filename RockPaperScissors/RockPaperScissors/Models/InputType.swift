@@ -8,7 +8,5 @@
 import Foundation
 
 @frozen enum InputType {
-    case exitProgram
-    case handSign
-    case invalidInput
+    case exitProgram, handSign, invalidInput
 }

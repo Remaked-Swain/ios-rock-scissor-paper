@@ -7,4 +7,4 @@
 import Foundation
 
 
-Game().run()
+Game().doRSP(currentWinner: .none)

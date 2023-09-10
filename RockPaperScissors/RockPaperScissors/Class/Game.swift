@@ -65,7 +65,7 @@ extension Game {
     }
     
     private func compareMutualHandSign(computerHandSign computer: HandSign?, userHandSign user: HandSign?, currentWinner: PlayerType) -> GameResult {
-        guard let computer = computer, let user = user else { print("비교과정 옵셔널 해제 실패"); return .draw }
+        guard let computer = computer, let user = user else { return .draw }
         
         let isNextStep: Bool = currentWinner != .none
         

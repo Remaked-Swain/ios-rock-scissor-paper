@@ -60,6 +60,8 @@
 				0458E3CD2AAB67AC00F1FA49 /* InputType.swift */,
 				0458E3D62AAB8DAF00F1FA49 /* GameResult.swift */,
 				0458E3DB2AAC1E2000F1FA49 /* UserInputModel.swift */,
+				0458E3D92AAB9A8700F1FA49 /* Script.swift */,
+				0458E3D42AAB791C00F1FA49 /* PlayerType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -70,15 +72,6 @@
 				0458E3C72AAB66C000F1FA49 /* Game.swift */,
 			);
 			path = Class;
-			sourceTree = "<group>";
-		};
-		0458E3D82AAB9A7200F1FA49 /* Namespace */ = {
-			isa = PBXGroup;
-			children = (
-				0458E3D92AAB9A8700F1FA49 /* Script.swift */,
-				0458E3D42AAB791C00F1FA49 /* PlayerType.swift */,
-			);
-			path = Namespace;
 			sourceTree = "<group>";
 		};
 		C7ABA0D4254EA63000B2367D = {
@@ -104,7 +97,6 @@
 				C7ABA0E0254EA63000B2367D /* main.swift */,
 				0458E3C62AAB668200F1FA49 /* Class */,
 				0458E3B02AA8127200F1FA49 /* Models */,
-				0458E3D82AAB9A7200F1FA49 /* Namespace */,
 			);
 			path = RockPaperScissors;
 			sourceTree = "<group>";

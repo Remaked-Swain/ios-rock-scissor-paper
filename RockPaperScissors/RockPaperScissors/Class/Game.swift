@@ -9,17 +9,14 @@ import Foundation
 
 final class Game {
     func doRSP(currentWinner: PlayerType) {
-        // 입력받기
         let userInput = input(currentWinner: currentWinner)
         let userInputType = userInput.showInputType()
         
-        // exit인 경우 return
         guard userInputType == .handSign || userInputType == .invalidInput else {
             print(Script.gameOver)
             return
         }
         
-        // invalidInput인 경우 1단계면 재귀, 2단계면 컴퓨터에게 턴 넘기고 return
         guard userInputType == .handSign else {
             if currentWinner == .none {
                 print(Script.invalidInput)
@@ -30,33 +27,13 @@ final class Game {
             }
         }
         
-        // 컴퓨터와 사용자가 낸 거 비교
         let computerHandSign = generateRandomHandSign()
         let userHandSign = convertToEachHandSign(userInput, currentWinner: currentWinner)
         let gameResult = compareMutualHandSign(computerHandSign: computerHandSign, userHandSign: userHandSign, currentWinner: currentWinner)
         let newWinner = determineWinner(gameResult)
         
-        // 1단계인 경우 임시 승자 결정하고 다시 가위바위보 한 번 더
-        // 2단계 인 경우 단순 승리, 패배는 턴 전환용이고 비긴 경우를 처리해야함
         guard currentWinner != .none, newWinner == .none else { return doRSP(currentWinner: newWinner) }
     }
-}
-
-// MARK: Methods for Test
-extension Game {
-//    private func test(_ computerHandSign: HandSign?, _ userHandSign: HandSign?) {
-//        guard let computerHandSign = computerHandSign, let userHandSign = userHandSign else { return }
-//        let com = test2(computerHandSign); let user = test2(userHandSign)
-//        print("-----System-----\n컴퓨터: \(com)\n사용자: \(user)\n-----------------")
-//    }
-//
-//    private func test2(_ handSign: HandSign) -> String {
-//        switch handSign {
-//        case .paper: return "보"
-//        case .rock: return "바위"
-//        case .scissors: return "가위"
-//        }
-//    }
 }
 
 // MARK: Resuable Methods

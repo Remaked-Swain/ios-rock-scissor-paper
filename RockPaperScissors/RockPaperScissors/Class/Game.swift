@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class Game {
+struct Game {
     func doRSP(currentWinner: PlayerType) {
         let userInput = input(currentWinner: currentWinner)
         let userInputType = userInput.showInputType()
@@ -18,21 +18,21 @@ final class Game {
         }
         
         guard userInputType == .handSign else {
-            if currentWinner == .none {
-                print(Script.invalidInput)
-                return doRSP(currentWinner: .none)
-            } else {
-                print(Script.noticeCurrentWinner(.computer))
-                return doRSP(currentWinner: .computer)
-            }
+            print(Script.invalidInput)
+            return currentWinner == .none ? doRSP(currentWinner: .none) : doRSP(currentWinner: .computer)
         }
         
         let computerHandSign = generateRandomHandSign()
         let userHandSign = convertToEachHandSign(userInput, currentWinner: currentWinner)
-        let gameResult = compareMutualHandSign(computerHandSign: computerHandSign, userHandSign: userHandSign, currentWinner: currentWinner)
-        let newWinner = determineWinner(gameResult)
+        let gameResult = compareMutualHandSign(computerHandSign: computerHandSign, userHandSign: userHandSign)
+        let newWinner = determineWinner(gameResult, currentWinner: currentWinner)
         
-        guard currentWinner != .none, newWinner == .none else { return doRSP(currentWinner: newWinner) }
+        guard currentWinner != .none, newWinner == .none else {
+            noticeGameStatus(gameResult: gameResult, currentWinner: currentWinner != .none ? newWinner : currentWinner)
+            return doRSP(currentWinner: newWinner)
+        }
+        
+        noticeGameStatus(gameResult: gameResult, currentWinner: currentWinner)
     }
 }
 
@@ -64,29 +64,39 @@ extension Game {
         HandSign.allCases.randomElement()
     }
     
-    private func compareMutualHandSign(computerHandSign computer: HandSign?, userHandSign user: HandSign?, currentWinner: PlayerType) -> GameResult {
+    private func compareMutualHandSign(computerHandSign computer: HandSign?, userHandSign user: HandSign?) -> GameResult {
         guard let computer = computer, let user = user else { return .draw }
-        
-        let isNextStep: Bool = currentWinner != .none
         
         switch (computer, user) {
         case (.rock, .paper), (.paper, .scissors), (.scissors, .rock):
-            print(isNextStep ? Script.noticeCurrentWinner(currentWinner) : Script.win)
             return .win
         case (.rock, .scissors), (.paper, .rock), (.scissors, .paper):
-            print(isNextStep ? Script.noticeCurrentWinner(currentWinner) : Script.lose)
             return .lose
         case (.rock, .rock), (.paper, .paper), (.scissors, .scissors):
-            print(Script.draw(currentWinner))
             return .draw
         }
     }
     
-    private func determineWinner(_ gameResult: GameResult) -> PlayerType {
+    private func determineWinner(_ gameResult: GameResult, currentWinner: PlayerType) -> PlayerType {
+        let isNextStep: Bool = currentWinner != .none
+        
         switch gameResult {
         case .win: return .user
         case .lose: return .computer
-        case .draw: return .none
+        case .draw: return isNextStep ? .none : currentWinner
+        }
+    }
+    
+    private func noticeGameStatus(gameResult: GameResult, currentWinner: PlayerType) {
+        let isNextStep: Bool = currentWinner != .none
+        
+        switch gameResult {
+        case .win:
+            print(isNextStep ? Script.noticeCurrentWinner(currentWinner) : Script.win)
+        case .lose:
+            print(isNextStep ? Script.noticeCurrentWinner(currentWinner) : Script.lose)
+        case .draw:
+            print(Script.draw(currentWinner))
         }
     }
 }

@@ -41,21 +41,21 @@ func doRSP(currentWinner: PlayerType) {
     }
     
     guard userInputType == .handSign else {
-        if currentWinner == .none {
-            print(Script.invalidInput)
-            return doRSP(currentWinner: .none)
-        } else {
-            print(Script.noticeCurrentWinner(.computer))
-            return doRSP(currentWinner: .computer)
-        }
+        print(Script.invalidInput)
+        return currentWinner == .none ? doRSP(currentWinner: .none) : doRSP(currentWinner: .computer)
     }
     
     let computerHandSign = generateRandomHandSign()
     let userHandSign = convertToEachHandSign(userInput, currentWinner: currentWinner)
-    let gameResult = compareMutualHandSign(computerHandSign: computerHandSign, userHandSign: userHandSign, currentWinner: currentWinner)
-    let newWinner = determineWinner(gameResult)
+    let gameResult = compareMutualHandSign(computerHandSign: computerHandSign, userHandSign: userHandSign)
+    let newWinner = determineWinner(gameResult, currentWinner: currentWinner)
     
-    guard currentWinner != .none, newWinner == .none else { return doRSP(currentWinner: newWinner) }
+    guard currentWinner != .none, newWinner == .none else {
+        noticeGameStatus(gameResult: gameResult, currentWinner: currentWinner != .none ? newWinner : currentWinner)
+        return doRSP(currentWinner: newWinner)
+    }
+    
+    noticeGameStatus(gameResult: gameResult, currentWinner: currentWinner)
 }
 ```
 
@@ -114,20 +114,15 @@ private func generateRandomHandSign() -> HandSign? {
 
 * compareMutualHandSign()
 ```swift
-private func compareMutualHandSign(computerHandSign computer: HandSign?, userHandSign user: HandSign?, currentWinner: PlayerType) -> GameResult {
-    guard let computer = computer, let user = user else { print("비교과정 옵셔널 해제 실패"); return .draw }
-    
-    let isNextStep: Bool = currentWinner != .none
+private func compareMutualHandSign(computerHandSign computer: HandSign?, userHandSign user: HandSign?) -> GameResult {
+    guard let computer = computer, let user = user else { return .draw }
     
     switch (computer, user) {
     case (.rock, .paper), (.paper, .scissors), (.scissors, .rock):
-        print(isNextStep ? Script.noticeCurrentWinner(currentWinner) : Script.win)
         return .win
     case (.rock, .scissors), (.paper, .rock), (.scissors, .paper):
-        print(isNextStep ? Script.noticeCurrentWinner(currentWinner) : Script.lose)
         return .lose
     case (.rock, .rock), (.paper, .paper), (.scissors, .scissors):
-        print(Script.draw(currentWinner))
         return .draw
     }
 }
@@ -141,11 +136,13 @@ private func compareMutualHandSign(computerHandSign computer: HandSign?, userHan
 
 * determineWinner()
 ```swift
-private func determineWinner(_ gameResult: GameResult) -> PlayerType {
+private func determineWinner(_ gameResult: GameResult, currentWinner: PlayerType) -> PlayerType {
+    let isNextStep: Bool = currentWinner != .none
+    
     switch gameResult {
     case .win: return .user
     case .lose: return .computer
-    case .draw: return .none
+    case .draw: return isNextStep ? .none : currentWinner
     }
 }
 ```
@@ -153,6 +150,26 @@ private func determineWinner(_ gameResult: GameResult) -> PlayerType {
     * determineWinner()
     1. 게임 결과에 따라 임시 승자나 확정 승자가 누구인지 반환
 > 가위바위보 단계에서는 .none일 경우 재시작 조건이지만 묵찌빠 단계에서는 .none이 게임 승패를 안내하고 프로그램을 끝내는 조건이다.
+
+* noticeGameStatus()
+```swift
+private func noticeGameStatus(gameResult: GameResult, currentWinner: PlayerType) {
+    let isNextStep: Bool = currentWinner != .none
+    
+    switch gameResult {
+    case .win:
+        print(isNextStep ? Script.noticeCurrentWinner(currentWinner) : Script.win)
+    case .lose:
+        print(isNextStep ? Script.noticeCurrentWinner(currentWinner) : Script.lose)
+    case .draw:
+        print(Script.draw(currentWinner))
+    }
+}
+```
+
+    * noticeGameStatus()
+    1. 임시 승자에 따라서 다른 출력물을 내보내기 위한 스위칭
+> 시점 별 출력값이 달라야 하는 것 때문에 애를 먹었다.
 
 --------------------------------------------------
 
